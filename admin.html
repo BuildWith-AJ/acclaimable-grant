@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Acclaimable Grant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Top Navbar -->
+    <nav class="bg-blue-900 text-white px-6 py-4 flex justify-between items-center shadow">
+        <div>
+            <h1 class="text-xl font-bold">Acclaimable Grant</h1>
+            <p class="text-blue-300 text-xs">Admin Dashboard</p>
+        </div>
+        <div class="flex items-center gap-4">
+            <span id="adminEmailDisplay" class="text-sm text-blue-200 hidden md:block"></span>
+            <button id="logoutBtn" class="px-4 py-2 bg-yellow-400 text-blue-900 text-sm font-semibold rounded-lg hover:bg-yellow-500 transition">
+                <i class="fas fa-sign-out-alt mr-1"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-xl shadow p-5 text-center">
+                <p class="text-3xl font-bold text-blue-900" id="totalCount">0</p>
+                <p class="text-gray-500 text-sm mt-1">Total Applications</p>
+            </div>
+            <div class="bg-white rounded-xl shadow p-5 text-center">
+                <p class="text-3xl font-bold text-yellow-500" id="pendingCount">0</p>
+                <p class="text-gray-500 text-sm mt-1">Pending</p>
+            </div>
+            <div class="bg-white rounded-xl shadow p-5 text-center">
+                <p class="text-3xl font-bold text-green-500" id="approvedCount">0</p>
+                <p class="text-gray-500 text-sm mt-1">Approved</p>
+            </div>
+            <div class="bg-white rounded-xl shadow p-5 text-center">
+                <p class="text-3xl font-bold text-red-500" id="rejectedCount">0</p>
+                <p class="text-gray-500 text-sm mt-1">Rejected</p>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex gap-2 mb-6 flex-wrap">
+            <button onclick="filterApplications('all')" data-filter="all"
+                class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-blue-900 text-white transition">
+                All
+            </button>
+            <button onclick="filterApplications('pending')" data-filter="pending"
+                class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-600 hover:bg-gray-50 transition">
+                Pending
+            </button>
+            <button onclick="filterApplications('approved')" data-filter="approved"
+                class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-600 hover:bg-gray-50 transition">
+                Approved
+            </button>
+            <button onclick="filterApplications('rejected')" data-filter="rejected"
+                class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-600 hover:bg-gray-50 transition">
+                Rejected
+            </button>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="text-center py-16">
+            <i class="fas fa-spinner fa-spin text-blue-900 text-3xl"></i>
+            <p class="text-gray-500 mt-3">Loading applications...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-16">
+            <i class="fas fa-folder-open text-gray-300 text-5xl"></i>
+            <p class="text-gray-400 mt-3">No applications found</p>
+        </div>
+
+        <!-- Applications Table (Desktop) -->
+        <div id="applicationsTable" class="hidden">
+            <div class="bg-white rounded-xl shadow overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-gray-50 border-b border-gray-200">
+                            <tr>
+                                <th class="text-left px-6 py-4 text-gray-600 font-semibold">Applicant</th>
+                                <th class="text-left px-6 py-4 text-gray-600 font-semibold">Amount</th>
+                                <th class="text-left px-6 py-4 text-gray-600 font-semibold">Employment</th>
+                                <th class="text-left px-6 py-4 text-gray-600 font-semibold">Submitted</th>
+                                <th class="text-left px-6 py-4 text-gray-600 font-semibold">Status</th>
+                                <th class="text-left px-6 py-4 text-gray-600 font-semibold">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applicationsBody" class="divide-y divide-gray-100">
+                            <!-- Rows injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Detail Modal -->
+    <div id="detailModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-start justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl my-8">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+                <h2 class="text-lg font-bold text-gray-800">Application Details</h2>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="px-6 py-6 space-y-6" id="modalBody">
+                <!-- Injected by JS -->
+            </div>
+
+            <!-- Modal Footer — Status Update -->
+            <div class="px-6 py-4 border-t border-gray-200 bg-gray-50 rounded-b-xl">
+                <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <label class="text-sm font-medium text-gray-700">Update Status:</label>
+                        <select id="statusSelect" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <button onclick="updateStatus()" id="updateStatusBtn"
+                        class="px-5 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition">
+                        Save Status
+                    </button>
+                </div>
+                <p id="statusUpdateMsg" class="hidden text-green-600 text-sm mt-2"><i class="fas fa-check-circle mr-1"></i>Status updated and email sent to applicant!</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+</body>
+</html>

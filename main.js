@@ -26,6 +26,19 @@ const db = getFirestore(app);
 const CLOUDINARY_CLOUD_NAME = "dtisvxq8m";
 const CLOUDINARY_UPLOAD_PRESET = "grant_uploads";
 
+// ============================================================
+//  EMAILJS CONFIG
+// ============================================================
+const EMAILJS_SERVICE_ID = "service_92txiq4";
+const EMAILJS_CONFIRMATION_TEMPLATE_ID = "template_nwxvtul";
+const EMAILJS_PUBLIC_KEY = "nx1tUiDTMLtnEEzUH";
+
+// Load EmailJS dynamically
+const emailJSScript = document.createElement("script");
+emailJSScript.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js";
+emailJSScript.onload = () => emailjs.init(EMAILJS_PUBLIC_KEY);
+document.head.appendChild(emailJSScript);
+
 
 // ============================================================
 //  TESTIMONIALS CAROUSEL — mouse drag
@@ -138,7 +151,6 @@ if (hamburger && mobileMenu) {
 
 // ============================================================
 //  HELPER — upload a file to Cloudinary
-//  Returns the public URL of the uploaded file
 // ============================================================
 async function uploadToCloudinary(file) {
   const formData = new FormData();
@@ -150,12 +162,10 @@ async function uploadToCloudinary(file) {
     { method: "POST", body: formData }
   );
 
-  if (!response.ok) {
-    throw new Error("File upload to Cloudinary failed");
-  }
+  if (!response.ok) throw new Error("File upload to Cloudinary failed");
 
   const data = await response.json();
-  return data.secure_url; // this is the permanent public link to the file
+  return data.secure_url;
 }
 
 
@@ -163,85 +173,76 @@ async function uploadToCloudinary(file) {
 //  FORM SUBMISSION
 // ============================================================
 const form = document.getElementById("grantForm");
-const submitBtn = form.querySelector("button[type='submit']");
-const successMessage = document.getElementById("successMessage");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+if (form) {
+    const submitBtn = form.querySelector("button[type='submit']");
+    const successMessage = document.getElementById("successMessage");
 
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Submitting...";
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-  try {
-    // 1. Upload ID file to Cloudinary (required)
-    const idFile = document.getElementById("idUpload").files[0];
-    const idFileURL = await uploadToCloudinary(idFile);
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Submitting...";
 
-    // 2. Upload supporting document to Cloudinary (optional)
-    let supportingDocURL = null;
-    const supportingFile = document.getElementById("supportingDoc").files[0];
-    if (supportingFile) {
-      supportingDocURL = await uploadToCloudinary(supportingFile);
-    }
+        try {
+            // 1. Upload ID file to Cloudinary (required)
+            const idFile = document.getElementById("idUpload").files[0];
+            const idFileURL = await uploadToCloudinary(idFile);
 
-    // 3. Save all form data + file URLs to Firestore
-    await addDoc(collection(db, "grant-applications"), {
+            // 2. Upload supporting document to Cloudinary (optional)
+            let supportingDocURL = null;
+            const supportingFile = document.getElementById("supportingDoc").files[0];
+            if (supportingFile) {
+                supportingDocURL = await uploadToCloudinary(supportingFile);
+            }
 
-      // Personal Information
-      fullName:         document.getElementById("fullName").value,
-      email:            document.getElementById("email").value,
-      phone:            document.getElementById("phone").value,
-      dateOfBirth:      document.getElementById("dob").value,
-      address:          document.getElementById("address").value,
+            // 3. Collect all form values
+            const fullName = document.getElementById("fullName").value;
+            const email = document.getElementById("email").value;
+            const amount = document.getElementById("amount").value;
+            const submittedAt = new Date().toISOString();
 
-      // Identification
-      idType:           document.getElementById("idType").value,
-      idNumber:         document.getElementById("idNumber").value,
-      idFileURL:        idFileURL,
+            // 4. Save all form data + file URLs to Firestore
+            await addDoc(collection(db, "grant-applications"), {
+                fullName,
+                email,
+                phone:            document.getElementById("phone").value,
+                dateOfBirth:      document.getElementById("dob").value,
+                address:          document.getElementById("address").value,
+                idType:           document.getElementById("idType").value,
+                idNumber:         document.getElementById("idNumber").value,
+                idFileURL,
+                amountRequested:  amount,
+                employmentStatus: document.getElementById("employment").value,
+                monthlyIncome:    document.getElementById("income").value || "Not provided",
+                purpose:          document.getElementById("purpose").value,
+                expectedImpact:   document.getElementById("impact").value,
+                previousGrant:    document.getElementById("previousGrant").value,
+                supportingDocURL,
+                submittedAt,
+                status: "pending"
+            });
 
-      // Financial Details
-      amountRequested:  document.getElementById("amount").value,
-      employmentStatus: document.getElementById("employment").value,
-      monthlyIncome:    document.getElementById("income").value || "Not provided",
+            // 5. Send confirmation email to applicant via EmailJS
+            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CONFIRMATION_TEMPLATE_ID, {
+                applicant_name: fullName,
+                to_email: email,
+                amount: amount,
+                submitted_date: new Date(submittedAt).toLocaleDateString("en-US", {
+                    year: "numeric", month: "long", day: "numeric"
+                })
+            });
 
-      // Grant Purpose
-      purpose:          document.getElementById("purpose").value,
-      expectedImpact:   document.getElementById("impact").value,
-      previousGrant:    document.getElementById("previousGrant").value,
+            // 6. Hide form, show success message, scroll to it
+            form.classList.add("hidden");
+            successMessage.classList.remove("hidden");
+            successMessage.scrollIntoView({ behavior: "smooth" });
 
-      // Supporting Document
-      supportingDocURL: supportingDocURL,
-
-      // Metadata
-      submittedAt:      new Date().toISOString(),
-      status:           "pending"
-    });
-
-    // 4. Hide form, show success message, scroll to it
-    form.classList.add("hidden");
-    successMessage.classList.remove("hidden");
-    successMessage.scrollIntoView({ behavior: "smooth" });
-
-  } catch (error) {
-    console.error("Submission error:", error);
-    alert("Something went wrong. Please try again.\n\nError: " + error.message);
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Submit Application";
-  }
-});
-
-// ============================================================
-//  ACTIVE NAV LINK INDICATOR
-// ============================================================
-document.addEventListener("DOMContentLoaded", () => {
-    const currentPage = window.location.pathname.split("/").pop() || "index.html";
-    const navLinks = document.querySelectorAll("a[data-page]");
-
-    navLinks.forEach(link => {
-        if (link.getAttribute("data-page") === currentPage) {
-            link.style.borderBottom = "2px solid #EAB308";
-            link.style.color = "#1e3a8a";
-            link.style.paddingBottom = "4px";
+        } catch (error) {
+            console.error("Submission error:", error);
+            alert("Something went wrong. Please try again.\n\nError: " + error.message);
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Application";
         }
     });
-});
+}
