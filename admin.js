@@ -282,20 +282,26 @@ window.updateStatus = async function() {
         if (appIndex !== -1) allApplications[appIndex].status = newStatus;
 
         // 3. Send status email to applicant via EmailJS
-        const application = allApplications.find(a => a.id === currentAppId);
-        if (application && application.email) {
-            const statusMessage = newStatus === "approved"
-                ? "Congratulations! Your grant application has been approved. Our team will be in touch with you shortly regarding the next steps."
-                : newStatus === "rejected"
-                ? "We regret to inform you that your grant application has not been approved at this time. You may reapply in the future."
-                : "Your application is currently under review. We will notify you once a decision has been made.";
+       // 3. Send status email to applicant via EmailJS
+        try {
+            const application = allApplications.find(a => a.id === currentAppId);
+            if (application && application.email) {
+                const statusMessage = newStatus === "approved"
+                    ? "Congratulations! Your grant application has been approved. Our team will be in touch with you shortly regarding the next steps."
+                    : newStatus === "rejected"
+                    ? "We regret to inform you that your grant application has not been approved at this time. You may reapply in the future."
+                    : "Your application is currently under review. We will notify you once a decision has been made.";
 
-            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_STATUS_TEMPLATE_ID, {
-                applicant_name: application.fullName,
-                to_email: application.email,
-                status: newStatus.charAt(0).toUpperCase() + newStatus.slice(1),
-                status_message: statusMessage
-            });
+                await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_STATUS_TEMPLATE_ID, {
+                    applicant_name: application.fullName,
+                    to_email: application.email,
+                    status: newStatus.charAt(0).toUpperCase() + newStatus.slice(1),
+                    status_message: statusMessage
+                });
+            }
+        } catch (emailError) {
+            console.warn("Status email failed:", emailError);
+            // Email failed silently — status update still succeeds
         }
 
         // 4. Update UI

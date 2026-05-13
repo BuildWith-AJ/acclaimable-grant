@@ -224,14 +224,20 @@ if (form) {
             });
 
             // 5. Send confirmation email to applicant via EmailJS
-            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CONFIRMATION_TEMPLATE_ID, {
-                applicant_name: fullName,
-                to_email: email,
-                amount: amount,
-                submitted_date: new Date(submittedAt).toLocaleDateString("en-US", {
-                    year: "numeric", month: "long", day: "numeric"
-                })
-            });
+// 5. Send confirmation email to applicant via EmailJS
+try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CONFIRMATION_TEMPLATE_ID, {
+        applicant_name: fullName,
+        to_email: email,
+        amount: amount,
+        submitted_date: new Date(submittedAt).toLocaleDateString("en-US", {
+            year: "numeric", month: "long", day: "numeric"
+        })
+    });
+} catch (emailError) {
+    console.warn("Confirmation email failed:", emailError);
+    // Email failed silently — form submission still succeeds
+}
 
             // 6. Hide form, show success message, scroll to it
             form.classList.add("hidden");
