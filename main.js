@@ -229,3 +229,19 @@ form.addEventListener("submit", async (e) => {
     submitBtn.textContent = "Submit Application";
   }
 });
+
+// ============================================================
+//  ACTIVE NAV LINK INDICATOR
+// ============================================================
+document.addEventListener("DOMContentLoaded", () => {
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+    const navLinks = document.querySelectorAll("a[data-page]");
+
+    navLinks.forEach(link => {
+        if (link.getAttribute("data-page") === currentPage) {
+            link.style.borderBottom = "2px solid #EAB308";
+            link.style.color = "#1e3a8a";
+            link.style.paddingBottom = "4px";
+        }
+    });
+});

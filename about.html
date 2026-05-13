@@ -13,11 +13,11 @@
             <div class="flex justify-between items-center h-16">
                 <div><span class="text-xl font-bold text-blue-900"><a href="index.html">Acclaimable Grant</a></span></div>
                 <div class="hidden md:flex space-x-6 items-center">
-                        <a href="index.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Home</a>
-                        <a href="about.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">About</a>
-                        <a href="apply.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Apply</a>
-                        <a href="contact.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Contact</a>
-                    </div>
+                    <a href="index.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Home</a>
+                    <a href="about.html" data-page="about.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition" style="border-bottom: 2px solid #EAB308; color: #1e3a8a; padding-bottom: 4px;">About</a>
+                    <a href="apply.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Apply</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Contact</a>
+                </div>
                 <button id="hamburger" class="md:hidden text-black hover:text-blue-900"><i class="fas fa-bars text-2xl"></i></button>
                 <div class="hidden md:flex items-center space-x-4">
                     <a href="apply.html" class="px-4 py-2 text-sm font-medium text-gray-700 bg-yellow-200 rounded-lg hover:bg-yellow-400 transition">Start Application</a>
@@ -27,13 +27,13 @@
             <div id="mobile-menu" class="absolute top-full left-0 w-full bg-white shadow-lg hidden md:hidden">
                 <div class="px-4 pt-2 pb-3 space-y-1">
                     <a href="index.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Home</a>
-                    <a href="about.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">About</a>
+                    <a href="about.html" data-page="about.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition" style="border-bottom: 2px solid #EAB308; color: #1e3a8a; padding-bottom: 4px;">About</a>
                     <a href="apply.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Apply</a>
                     <a href="contact.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Contact</a>
                     <div class="flex flex-col space-y-2 pt-2">
                         <a href="apply.html" class="px-4 py-2 text-sm font-medium text-gray-700 bg-yellow-200 rounded-lg hover:bg-yellow-400 transition text-center">Start Application</a>
                         <a href="contact.html" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-blue-900 hover:text-white transition text-center">Get Help</a>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -42,11 +42,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div class="flex flex-col justify-center space-y-6 leading-20">
                 <div class="font-mono">___ Our Mission</div>
-                    <h1 class="text-5xl font-bold text-gray-600 font-mono mb-4">Financial support for those who need it most.</h1>
+                    <h1 class="text-3xl font-bold text-gray-600 font-mono mb-4">Financial support for those who need it most.</h1>
                     <p class="text-lg text-gray-600 font-mono mt-4">Acclaimable Grant provides emergency bill assistance to underprivileged individuals. We believe no one should struggle alone with essential expenses.</p>
                 <div class="flex flex-col sm:flex-row gap-4 mb-16 item-center">
-                    <a href="#" class="px-6 py-3 bg-yellow-300 text-gray-700 text-center font-semibold rounded-lg hover:bg-yellow-400 transition">See if you qualify</a>
-                    <a href="#" class="px-6 py-3 text-gray-600 bg-blue-200 text-center font-semibold rounded-lg hover:bg-blue-300 transition">Learn our values</a>
+                    <a href="apply.html#eligibility" class="px-6 py-3 bg-yellow-300 text-gray-900 text-center font-semibold rounded-lg hover:bg-yellow-400 transition">See if you qualify</a>
+                    <a href="#core-values" class="px-6 py-3 text-gray-900 bg-blue-200 text-center font-semibold rounded-lg hover:bg-blue-300 transition">Learn our values</a>
                 </div>
             </div>
             <div class="flex items-center justify-center rounded-2xl">
@@ -59,14 +59,14 @@
 
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
         <div class="font-semibold text-sm mb-7">___ Our foundation</div>
-        <h1 class="text-5xl font-bold text-gray-600 mb-5 font-mono">How Acclaimable Grant Began and Grew</h1>
+        <h1 class="text-3xl font-bold text-gray-600 mb-5 font-mono">How Acclaimable Grant Began and Grew</h1>
         <p class="text-lg text-gray-600 leading-relaxed">Acclaimable Grant was created to bridge a gap: hardworking individuals facing urgent bills with nowhere to turn. Founded on the belief that financial hardship shouldn't derail lives, we've grown from a single mission into a trusted resource helping people stay housed, fed, and stable.</p>
     </section>
 
     <section class="px-6 sm:px-6 lg:px-8 py-16 max-w-7xl mx-auto">
         <div class="font-semibold text-sm mb-3">__ Meet our team</div>
             <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-3 gap-6">
-                <h1 class="text-4xl font-bold text-gray-600">Dedicated to helping those in need</h1>
+                <h1 class="text-3xl font-mono font-bold text-gray-600">Dedicated to helping those in need</h1>
                 <div class="md:flex items-center gap-6">
                     <p class="text-lg text-gray-600 leading-relaxed">A small, committed team working to connect financial assistance with families facing hardship across the world.</p>
                 </div>
@@ -74,7 +74,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
             <div class="px-3 sm:px-6 lg:px-8 py-16">
                 <div class="max-w-md mx-auto">
-                    <div class="bg-white rounded-lg overflow-hidden">
+                    <div class="bg-white rounded-lg p-4 overflow-hidden">
                         <div class="w-full h-65 flex text-start mb-3">
                             <img src="img/mary.png" alt="Sarah Johnson" class="w-full h-full object-cover rounded-lg">
                         </div>
@@ -92,7 +92,7 @@
             </div>
             <div class="px-3 sm:px-6 lg:px-8 py-16">
                 <div class="max-w-md mx-auto">
-                    <div class="bg-white rounded-lg overflow-hidden">
+                    <div class="bg-white rounded-lg p-4 overflow-hidden">
                         <div class="w-full h-65 flex text-start mb-3">
                             <img src="img/mary.png" alt="Sarah Johnson" class="w-full h-full object-cover rounded-lg">
                         </div>
@@ -110,7 +110,7 @@
             </div>
             <div class="px-3 sm:px-6 lg:px-8 py-16">
                 <div class="max-w-md mx-auto">
-                    <div class="bg-white rounded-lg overflow-hidden">
+                    <div class="bg-white rounded-lg p-4 overflow-hidden">
                         <div class="w-full h-65 flex text-start mb-3">
                             <img src="img/mary.png" alt="Sarah Johnson" class="w-full h-full object-cover rounded-lg">
                         </div>
@@ -133,7 +133,7 @@
             <!-- Header with Navigation Brackets -->
             <div class="font-semibold text-sm mb-3">Impact Stories</div>
             <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-8 gap-6">
-                <h1 class="text-4xl font-bold text-gray-600">Real people real change</h1>
+                <h1 class="text-3xl font-mono font-bold text-gray-600">Real people real change</h1>
                 <div class="hidden md:flex items-center gap-6">
                     <button id="dragPrevBtn" class="flex-shrink-0 text-3xl text-black hover:text-gray-700 transition font-semibold"><i class="fa-solid fa-angle-left"></i></button>
                     <button id="dragNextBtn" class="flex-shrink-0 text-3xl text-black hover:text-gray-700 transition font-semibold"><i class="fa-solid fa-angle-right"></i></button>
@@ -220,8 +220,8 @@
     <section class="px-6 sm:px-6 lg:px-8 py-16 max-w-7xl mx-auto">
         <div class="max-w-7xl mx-auto">
             <!-- Header -->
-            <div class="font-mono mb-4 text-center">___ Core values</div>
-            <h1 class="text-4xl font-bold text-gray-600 mb-6 text-center">Principles that guide our work</h1>
+            <div id="core-values" class="font-mono mb-4 text-center">___ Core values</div>
+            <h1 class="text-3xl font-mono font-bold text-gray-600 mb-6 text-center">Principles that guide our work</h1>
             <p class="text-lg text-gray-600 mb-10 leading-relaxed text-center">We believe financial assistance should be straightforward, transparent, and grounded in respect for every person we serve.</p>
             
             <!-- Buttons -->
@@ -300,7 +300,7 @@
     </section>
     <section class="px-4 sm:px-6 lg:px-8 py-20">
         <div class="max-w-3xl mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-600 mb-6">Ready to help or need support?</h1>
+            <h1 class="text-3xl md:text-5xl font-bold font-mono text-gray-600 mb-6">Ready to help or need support?</h1>
             <p class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed">Join us in supporting those facing financial hardship. Apply for a grant, donate, or volunteer with Acclaimable Grant today.</p>
             
             <!-- Buttons -->

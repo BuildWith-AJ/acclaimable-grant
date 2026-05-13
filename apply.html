@@ -15,7 +15,7 @@
                 <div class="hidden md:flex space-x-6 items-center">
                         <a href="index.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Home</a>
                         <a href="about.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">About</a>
-                        <a href="apply.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Apply</a>
+                        <a href="apply.html" data-page="apply.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition" style="border-bottom: 2px solid #EAB308; color: #1e3a8a; padding-bottom: 4px;">Apply</a>
                         <a href="contact.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Contact</a>
                     </div>
                 <button id="hamburger" class="md:hidden text-black hover:text-blue-900"><i class="fas fa-bars text-2xl"></i></button>
@@ -28,10 +28,10 @@
                 <div class="px-4 pt-2 pb-3 space-y-1">
                     <a href="index.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Home</a>
                     <a href="about.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">About</a>
-                    <a href="apply.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Apply</a>
+                    <a href="apply.html" data-page="apply.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition" style="border-bottom: 2px solid #EAB308; color: #1e3a8a; padding-bottom: 4px;">Apply</a>
                     <a href="contact.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Contact</a>
                     <div class="flex flex-col space-y-2 pt-2">
-                        <a href="apply.html" class="px-4 py-2 text-sm font-medium text-gray-700 bg-yellow-200 rounded-lg hover:bg-yellow-400 transition text-center">Start Application</a>
+                        <a href="apply.html" class="px-4 py-2 text-sm font-medium text-gray-700 bg-yellow-300 rounded-lg hover:bg-yellow-400 transition text-center">Start Application</a>
                         <a href="contact.html" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-blue-900 hover:text-white transition text-center">Get Help</a>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                     <p class="text-lg text-gray-600 font-mono mt-4">Acclaimable Grant provide financial assistance to those in need. Apply now and take the first step toward relief.</p>
                 <div class="flex flex-col sm:flex-row gap-4 mb-16 item-center">
                     <a href="#eligibility" class="px-6 py-3 bg-yellow-300 text-gray-700 text-center font-semibold rounded-lg hover:bg-yellow-400 transition">Learn eligibility</a>
-                    <a href="tel:+1-800-555-0123" class="px-6 py-3 text-gray-600 bg-blue-200 text-center font-semibold rounded-lg hover:bg-blue-300 transition">Call for questions</a>
+                    <a href="contact.html" class="px-6 py-3 text-gray-600 bg-blue-200 text-center font-semibold rounded-lg hover:bg-blue-300 transition">Call for questions</a>
                 </div>
             </div>
             <div class="flex items-center justify-center rounded-2xl">
@@ -58,14 +58,14 @@
     </section>
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center" id="eligibility">
         <div class="font-semibold text-sm mb-7">___ Eligibility requirements</div>
-        <h1 class="text-5xl font-bold text-gray-600 mb-5 font-mono">Who can apply for a grant from Acclaimable Grant</h1>
+        <h1 class="text-3xl font-bold text-gray-600 mb-5 font-mono">Who can apply for a grant from Acclaimable Grant</h1>
         <p class="text-lg text-gray-600 leading-relaxed">You'll need to provide valid identification, proof of income, and documentation of your current bills. We accept applications from individuals facing financial hardship with essential expenses.</p>
     </section>
 
     <section id="apply-form" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div class="bg-white rounded-xl shadow-lg p-8 md:p-12">
             <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Grant Application Form</h2>
+                <h2 class="text-3xl font-bold font-mono text-gray-800 mb-4">Grant Application Form</h2>
                 <p class="text-gray-600">Please fill out all required fields to submit your application.</p>
             </div>
             
@@ -190,7 +190,7 @@
 
                 <!-- Submit Button -->
                 <div class="text-center">
-                    <button type="submit" class="px-8 py-4 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition transform hover:scale-105">
+                    <button type="submit" class="px-8 py-2 bg-yellow-300 text-gray-900 font-semibold rounded-lg hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition transform hover:scale-105">
                         Submit Application
                     </button>
                 </div>

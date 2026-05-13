@@ -13,11 +13,11 @@
             <div class="flex justify-between items-center h-16">
                 <div><span class="text-xl font-bold text-blue-900"><a href="index.html">Acclaimable Grant</a></span></div>
                 <div class="hidden md:flex space-x-6 items-center">
-                        <a href="index.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Home</a>
-                        <a href="about.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">About</a>
-                        <a href="apply.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Apply</a>
-                        <a href="contact.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Contact</a>
-                    </div>
+                    <a href="index.html" data-page="index.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition" style="border-bottom: 2px solid #EAB308; color: #1e3a8a; padding-bottom: 4px;">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">About</a>
+                    <a href="apply.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Apply</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition">Contact</a>
+                </div>
                 <button id="hamburger" class="md:hidden text-black hover:text-blue-900"><i class="fas fa-bars text-2xl"></i></button>
                 <div class="hidden md:flex items-center space-x-4">
                     <a href="apply.html" class="px-4 py-2 text-sm font-medium text-gray-700 bg-yellow-200 rounded-lg hover:bg-yellow-400 transition">Start Application</a>
@@ -26,7 +26,7 @@
             </div>
             <div id="mobile-menu" class="absolute top-full left-0 w-full bg-white shadow-lg hidden md:hidden">
                 <div class="px-4 pt-2 pb-3 space-y-1">
-                    <a href="index.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Home</a>
+                    <a href="index.html" data-page="index.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition" style="border-bottom: 2px solid #EAB308; color: #1e3a8a; padding-bottom: 4px;">Home</a>
                     <a href="about.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">About</a>
                     <a href="apply.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Apply</a>
                     <a href="contact.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Contact</a>
@@ -45,8 +45,8 @@
                 <h1 class="text-5xl font-bold text-gray-600 font-mono mb-4">Get help paying your essential bills today.</h1>
                 <p class="text-lg text-gray-600 font-mono mt-4">Acclaimable Grant provides financial support to those struggling with bills. Apply now and get the assistance you need.</p>
                 <div class="flex flex-col sm:flex-row gap-4 mb-16 item-center">
-                    <a href="#" class="px-6 py-3 bg-yellow-300 text-center text-gray-700 font-semibold rounded-lg hover:bg-yellow-400 transition">Apply for a grant</a>
-                    <a href="#" class="px-6 py-3 text-gray-600 text-center bg-blue-200 font-semibold rounded-lg hover:bg-blue-300 transition">Learn More</a>
+                    <a href="apply.html" class="px-6 py-3 bg-yellow-300 text-center text-gray-700 font-semibold rounded-lg hover:bg-yellow-400 transition">Apply for a grant</a>
+                    <a href="about.html" class="px-6 py-3 text-gray-600 text-center bg-blue-200 font-semibold rounded-lg hover:bg-blue-300 transition">Learn More</a>
                 </div>
             </div>
             <div class="flex items-center justify-center rounded-2xl">
@@ -243,70 +243,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="px-6 sm:px-6 lg:px-8 py-16 max-w-7xl mx-auto">
-        <div class="max-w-7xl mx-auto">
-            <!-- Header -->
-            <div class="font-mono mb-4 text-center">___ Get in touch</div>
-            <h1 class="text-4xl font-bold text-gray-900 mb-6 text-center">Ready to apply or have questions?</h1>
-            <p class="text-lg text-gray-600 mb-12 text-center leading-relaxed">Contact us to start your application or learn more about eligibility. We'll respond within one business day.</p>
-
-            <!-- Contact Information -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">
-                <!-- Email -->
-                <div class="text-center">
-                    <div class="mb-4 flex justify-center">
-                        <i class="fa-solid fa-envelope text-4xl text-blue-900"></i>
-                    </div>
-                    <a href="mailto:support@acclaimablegrant.com" class="text-lg font-semibold text-blue-700 hover:text-blue-800 transition">support@acclaimablegrant.com</a>
-                </div>
-
-                <!-- Phone -->
-                <div class="text-center">
-                    <div class="mb-4 flex justify-center">
-                        <i class="fa-solid fa-phone text-4xl text-blue-900"></i>
-                    </div>
-                    <a href="tel:+1-800-555-0123" class="text-lg font-semibold text-blue-700 hover:text-blue-800 transition">+1 (800) 555-0123</a>
-                </div>
-
-                <!-- Location -->
-                <div class="text-center">
-                    <div class="mb-4 flex justify-center">
-                        <i class="fa-solid fa-location-dot text-4xl text-blue-900"></i>
-                    </div>
-                    <p class="text-lg font-semibold text-gray-600">123 Main Street, New York, NY 10001</p>
-                </div>
-            </div>
-
-            <!-- Contact Form -->
-            <div class="bg-gray-50 rounded-lg p-8 border border-gray-200">
-                <h2 class="text-2xl font-bold text-gray-600 mb-8">Send us a Message</h2>
-                <form class="space-y-6">
-                    <!-- Full Name -->
-                    <div>
-                        <label for="fullName" class="block text-sm font-semibold text-gray-900 mb-2">Full Name</label>
-                        <input type="text" id="fullName" name="fullName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" placeholder="Your full name">
-                    </div>
-
-                    <!-- Email Address -->
-                    <div>
-                        <label for="email" class="block text-sm font-semibold text-gray-900 mb-2">Email Address</label>
-                        <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" placeholder="your.email@example.com">
-                    </div>
-
-                    <!-- Message -->
-                    <div>
-                        <label for="message" class="block text-sm font-semibold text-gray-900 mb-2">Your Message</label>
-                        <textarea id="message" name="message" required rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent resize-none" placeholder="Type your message here..."></textarea>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="px-6 py-3 bg-yellow-300 text-gray-900 font-semibold rounded-lg hover:bg-yellow-700 transition">Submit</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
     <!-- CTA Section -->
     <section class="px-4 sm:px-6 lg:px-8 py-20">
         <div class="max-w-3xl mx-auto text-center">
@@ -316,7 +252,7 @@
             <!-- Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <a href="apply.html" class="px-6 py-3 bg-yellow-300 text-gray-900 font-semibold rounded-lg hover:bg-yellow-400 transition text-center">Start your application</a>
-                <a href="tel:+1-800-555-0123" class="px-6 py-3 text-gray-900 bg-blue-200 font-semibold rounded-lg hover:bg-blue-300 transition text-center">Call for assistance</a>
+                <a href="contact.html" class="px-6 py-3 text-gray-900 bg-blue-200 font-semibold rounded-lg hover:bg-blue-300 transition text-center">Reach out for assistance</a>
             </div>
         </div>
     </section>
