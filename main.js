@@ -39,6 +39,11 @@ emailJSScript.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.
 emailJSScript.onload = () => emailjs.init(EMAILJS_PUBLIC_KEY);
 document.head.appendChild(emailJSScript);
 
+// ============================================================
+//  FORMSPREE — contact form endpoint
+// ============================================================
+const FORMSPREE_CONTACT_URL = "https://formspree.io/f/xpqbgano";
+
 
 // ============================================================
 //  TESTIMONIALS CAROUSEL — mouse drag
@@ -153,24 +158,24 @@ if (hamburger && mobileMenu) {
 //  HELPER — upload a file to Cloudinary
 // ============================================================
 async function uploadToCloudinary(file) {
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
-  const response = await fetch(
-    `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,
-    { method: "POST", body: formData }
-  );
+    const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,
+        { method: "POST", body: formData }
+    );
 
-  if (!response.ok) throw new Error("File upload to Cloudinary failed");
+    if (!response.ok) throw new Error("File upload to Cloudinary failed");
 
-  const data = await response.json();
-  return data.secure_url;
+    const data = await response.json();
+    return data.secure_url;
 }
 
 
 // ============================================================
-//  FORM SUBMISSION
+//  GRANT APPLICATION FORM SUBMISSION
 // ============================================================
 const form = document.getElementById("grantForm");
 
@@ -182,12 +187,14 @@ if (form) {
         e.preventDefault();
 
         submitBtn.disabled = true;
-        submitBtn.textContent = "Submitting...";
+        submitBtn.textContent = "Uploading files...";
 
         try {
             // 1. Upload ID file to Cloudinary (required)
             const idFile = document.getElementById("idUpload").files[0];
             const idFileURL = await uploadToCloudinary(idFile);
+
+            submitBtn.textContent = "Saving your application...";
 
             // 2. Upload supporting document to Cloudinary (optional)
             let supportingDocURL = null;
@@ -220,24 +227,25 @@ if (form) {
                 previousGrant:    document.getElementById("previousGrant").value,
                 supportingDocURL,
                 submittedAt,
-                status: "pending"
+                status:           "pending"
             });
 
-            // 5. Send confirmation email to applicant via EmailJS
-// 5. Send confirmation email to applicant via EmailJS
-try {
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CONFIRMATION_TEMPLATE_ID, {
-        applicant_name: fullName,
-        to_email: email,
-        amount: amount,
-        submitted_date: new Date(submittedAt).toLocaleDateString("en-US", {
-            year: "numeric", month: "long", day: "numeric"
-        })
-    });
-} catch (emailError) {
-    console.warn("Confirmation email failed:", emailError);
-    // Email failed silently — form submission still succeeds
-}
+            submitBtn.textContent = "Almost done...";
+
+            // 5. Send confirmation email to applicant via EmailJS (silent fail)
+            try {
+                await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CONFIRMATION_TEMPLATE_ID, {
+                    applicant_name: fullName,
+                    to_email:       email,
+                    amount:         amount,
+                    submitted_date: new Date(submittedAt).toLocaleDateString("en-US", {
+                        year: "numeric", month: "long", day: "numeric"
+                    })
+                });
+            } catch (emailError) {
+                console.warn("Confirmation email failed:", emailError);
+                // Fails silently — form submission still succeeds
+            }
 
             // 6. Hide form, show success message, scroll to it
             form.classList.add("hidden");
@@ -249,6 +257,52 @@ try {
             alert("Something went wrong. Please try again.\n\nError: " + error.message);
             submitBtn.disabled = false;
             submitBtn.textContent = "Submit Application";
+        }
+    });
+}
+
+
+// ============================================================
+//  CONTACT FORM SUBMISSION — Formspree
+// ============================================================
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+    const contactBtn = contactForm.querySelector("button[type='submit']");
+    const contactSuccess = document.getElementById("contactSuccess");
+
+    contactForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        contactBtn.disabled = true;
+        contactBtn.textContent = "Sending...";
+
+        try {
+            const response = await fetch(FORMSPREE_CONTACT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    first_name: document.getElementById("firstName").value,
+                    last_name:  document.getElementById("lastName").value,
+                    email:      document.getElementById("contactEmail").value,
+                    phone:      document.getElementById("contactPhone").value,
+                    subject:    document.getElementById("subject").value,
+                    message:    document.getElementById("message").value
+                })
+            });
+
+            if (!response.ok) throw new Error("Failed to send message");
+
+            // Hide form, show success message
+            contactForm.classList.add("hidden");
+            contactSuccess.classList.remove("hidden");
+            contactSuccess.scrollIntoView({ behavior: "smooth" });
+
+        } catch (error) {
+            console.error("Contact form error:", error);
+            alert("Something went wrong. Please try again.");
+            contactBtn.disabled = false;
+            contactBtn.textContent = "Send Message";
         }
     });
 }

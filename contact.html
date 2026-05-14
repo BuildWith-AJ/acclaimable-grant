@@ -6,6 +6,7 @@
     <title>Contact Acclaimable Grant - Get in Touch with Us</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body class="bg-yellow-50">
       <nav class="bg-white shadow sticky top-0 z-50">
@@ -29,7 +30,7 @@
                     <a href="index.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Home</a>
                     <a href="about.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">About</a>
                     <a href="apply.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Apply</a>
-                    <a href="contact.html" data-page="contact.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition" style="border-bottom: 2px solid #EAB308; color: #1e3a8a; padding-bottom: 4px;">Contact</a>
+                    <a href="contact.html" data-page="contact.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium" style="border-bottom: 2px solid #EAB308; color: #1e3a8a; padding-bottom: 4px;">Contact</a>
                     <div class="flex flex-col space-y-2 pt-2">
                         <a href="apply.html" class="px-4 py-2 text-sm font-medium text-gray-700 bg-yellow-300 rounded-lg hover:bg-yellow-400 transition text-center">Start Application</a>
                         <a href="contact.html" class="px-4 py-2 text-sm font-medium text-gray-700 border-2 border-yellow-300 rounded-lg hover:bg-blue-900 hover:text-white transition text-center">Get Help</a>
@@ -55,14 +56,14 @@
                             <i class="fas fa-phone text-blue-600 mr-3"></i>
                             <div>
                                 <p class="font-medium">Phone</p>
-                                <p class="text-gray-600"><a href="tel:+1-800-555-0123">+1 (800) 555-0123</a></p>
+                                <p class="text-gray-600"><a href="tel:+1-424-571-2782">+1 (424) 571-2782</a></p>
                             </div>
                         </div>
                         <div class="flex items-center">
                             <i class="fas fa-envelope text-blue-600 mr-3"></i>
                             <div>
                                 <p class="font-medium">Email</p>
-                                <p class="text-gray-600"><a href="mailto:support@acclaimablegrant.com">support@acclaimablegrant.com</a></p>
+                                <p class="text-gray-600"><a href="mailto:support@acclaimablegrant.org">support@acclaimablegrant.org</a></p>
                             </div>
                         </div>
                         <div class="flex items-center">
@@ -72,22 +73,15 @@
                                 <p class="text-gray-600">Mon-Fri: 9AM - 6PM EST</p>
                             </div>
                         </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-blue-600 mr-3"></i>
-                            <div>
-                                <p class="font-medium">Address</p>
-                                <p class="text-gray-600">123 Grant Street<br>Financial District<br>New York, NY 10001</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <div class="bg-blue-50 p-6 rounded-lg">
                     <h3 class="text-lg font-semibold text-gray-800 mb-2">Emergency Support</h3>
                     <p class="text-gray-600 mb-4">If you're in immediate financial distress, call our emergency hotline for urgent assistance.</p>
-                    <a href="tel:+1-800-555-0199" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                    <a href="tel:+1-424-571-2782" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
                         <i class="fas fa-exclamation-triangle mr-2"></i>
-                        Emergency Hotline: +1 (800) 555-0199
+                        Emergency Hotline: +1 (424) 571-2782
                     </a>
                 </div>
             </div>
@@ -95,7 +89,8 @@
             <!-- Contact Form -->
             <div class="bg-white p-8 rounded-lg shadow-lg">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-6">Send us a Message</h2>
-                <form class="space-y-6">
+
+                <form id="contactForm" class="space-y-6">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name <span class="text-red-500">*</span></label>
@@ -108,13 +103,13 @@
                     </div>
 
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address <span class="text-red-500">*</span></label>
-                        <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <label for="contactEmail" class="block text-sm font-medium text-gray-700 mb-1">Email Address <span class="text-red-500">*</span></label>
+                        <input type="email" id="contactEmail" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
                     <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number <span class="text-red-500">*</span></label>
-                        <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <label for="contactPhone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <input type="tel" id="contactPhone" name="phone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
                     <div>
@@ -142,26 +137,34 @@
                         </label>
                     </div>
 
-                    <button type="submit" class="w-full bg-yellow-300 text-gray-900 py-3 px-4 rounded-md hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
+                    <button type="submit"
+                        class="w-full bg-yellow-300 text-gray-900 py-3 px-4 rounded-md hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition font-semibold">
                         Send Message
                     </button>
                 </form>
+
+                <!-- Success Message -->
+                <div id="contactSuccess" class="hidden mt-6 p-6 bg-green-50 border border-green-200 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 text-2xl mr-3"></i>
+                        <div>
+                            <h3 class="text-lg font-semibold text-green-800">Message Sent!</h3>
+                            <p class="text-green-700">Thank you for reaching out. We'll get back to you within 1-2 business days.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-       <!-- Footer Section -->
+    <!-- Footer Section -->
     <footer class="bg-gray-900 text-gray-100 px-4 sm:px-6 lg:px-8 py-16">
         <div class="max-w-7xl mx-auto">
-            <!-- Footer Content -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <!-- Brand -->
                 <div>
                     <h3 class="text-2xl font-bold text-yellow-300 mb-4">Acclaimable Grant</h3>
                     <p class="text-gray-400">Providing financial support to those in need. Empowering families with grant assistance.</p>
                 </div>
-
-                <!-- Quick Links -->
                 <div>
                     <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
                     <ul class="space-y-2">
@@ -171,8 +174,6 @@
                         <li><a href="contact.html" class="text-gray-400 hover:text-yellow-300 transition">Contact</a></li>
                     </ul>
                 </div>
-
-                <!-- Social Links -->
                 <div>
                     <h4 class="text-lg font-semibold text-white mb-4">Follow Us</h4>
                     <div class="flex space-x-4">
@@ -182,14 +183,12 @@
                         <a href="#" class="text-gray-400 hover:text-yellow-300 transition text-2xl"><i class="fa-brands fa-instagram"></i></a>
                     </div>
                 </div>
-
-                <!-- Contact Info -->
                 <div>
                     <h4 class="text-lg font-semibold text-white mb-4">Contact Us</h4>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-2">
                             <i class="fa-solid fa-envelope text-yellow-300"></i>
-                            <a href="mailto:support@acclaimablegrant.com" class="text-gray-400 hover:text-yellow-300 transition">support@acclaimablegrant.com</a>
+                            <a href="mailto:support@acclaimablegrant.org" class="text-gray-400 hover:text-yellow-300 transition">support@acclaimablegrant.org</a>
                         </li>
                         <li class="flex items-center gap-2">
                             <i class="fa-solid fa-phone text-yellow-300"></i>
@@ -202,11 +201,7 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- Divider Line -->
             <div class="border-t border-gray-700 my-8"></div>
-
-            <!-- Copyright Section -->
             <div class="text-center">
                 <p class="text-gray-400">&copy; 2026 Acclaimable Grant. All rights reserved. | <a href="#" class="hover:text-yellow-300 transition">Privacy Policy</a> | <a href="#" class="hover:text-yellow-300 transition">Terms of Service</a></p>
             </div>
